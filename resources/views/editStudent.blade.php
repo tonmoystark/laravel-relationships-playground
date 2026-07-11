@@ -38,6 +38,11 @@
                     value="{{ $student->name }}"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
+                @error('name')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Email -->
@@ -52,6 +57,11 @@
                     value="{{ $student->email }}"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
+                @error('email')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Age -->
@@ -66,6 +76,11 @@
                     value="{{ $student->age }}"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
+                @error('age')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Current Image -->
@@ -79,6 +94,7 @@
                     alt="{{ $student->name }}"
                     class="w-28 h-28 rounded-full object-cover border"
                 >
+
             </div>
 
             <!-- New Image -->
@@ -92,6 +108,11 @@
                     name="image"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3"
                 >
+                @error('image')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
 
                 <p class="text-sm text-gray-500 mt-2">
                     Leave this empty if you don't want to change the image.

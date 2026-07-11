@@ -62,7 +62,11 @@
                     class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter phone number"
                 >
-
+                @error('phone')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Address -->
@@ -78,7 +82,11 @@
                     class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter address"
                 ></textarea>
-
+                @error('address')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Guardian Name -->
@@ -94,7 +102,11 @@
                     class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter guardian name"
                 >
-
+                @error('guardian_name')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Buttons -->

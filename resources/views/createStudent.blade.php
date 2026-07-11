@@ -32,8 +32,13 @@
                     name="name"
                     placeholder="Enter student's name"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
+                    value="{{ old('name') }}"
                 >
+                @error('name')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Email -->
@@ -47,8 +52,13 @@
                     name="email"
                     placeholder="Enter student's email"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
+                    value="{{ old('email') }}"
                 >
+                @error('email')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <!-- Age -->
@@ -62,8 +72,13 @@
                     name="age"
                     placeholder="Enter student's age"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
+                    value="{{ old('age') }}"
                 >
+                @error('age')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             {{-- images --}}
@@ -76,8 +91,12 @@
                     type="file"
                     name="image"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
                 >
+                @error('image')
+                    <p class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
             <!-- Buttons -->
             <div class="flex gap-4">

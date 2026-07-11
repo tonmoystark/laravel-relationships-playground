@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddStudentFormRequest;
+use App\Http\Requests\CreateProfileFormRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +45,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddStudentFormRequest $request)
     {
         //
         $student = new Student();
@@ -55,7 +57,7 @@ class StudentController extends Controller
         return redirect('/student');
     }
 
-    public function storeProfile(Request $request, int $id)
+    public function storeProfile(CreateProfileFormRequest $request, int $id)
     {
         //
         $student = Student::with('profile')->findOrFail($id);
@@ -93,7 +95,7 @@ class StudentController extends Controller
         return view('editStudent', compact('student'));
     }
 
-    public function editProfile(Request $request, int $id)
+    public function editProfile(CreateProfileFormRequest $request, int $id)
     {
         $student = Student::with('profile')->findOrFail($id);
         $student->profile->phone = $request->phone;
@@ -106,7 +108,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(AddStudentFormRequest $request, int $id)
     {
         //
         $student = Student::with('profile')->findOrFail($id);
