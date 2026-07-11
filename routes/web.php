@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MentorController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,9 @@ Route::prefix('student')->controller(StudentController::class)->group(function (
     Route::put('/{id}/profile', 'editProfile');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'destroy');
+});
+
+
+Route::prefix('mentors')->controller(MentorController::class)->group(function () {
+    // we will start work from here.
 });
