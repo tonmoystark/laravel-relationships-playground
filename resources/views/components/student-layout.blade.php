@@ -20,7 +20,10 @@
             <div class="flex items-center gap-6 text-white">
 
                 <a href="/student" class="hover:text-blue-200 transition">
-                    Students
+                    Home
+                </a>
+                <a href="/student/data" class="hover:text-blue-200 transition">
+                    Student Data
                 </a>
 
                 <a href="/student/create" class="hover:text-blue-200 transition">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -15,6 +16,13 @@ class StudentController extends Controller
         //
         $students = Student::all();
         return view('allStudents', compact('students'));
+    }
+
+    public function studentsData()
+    {
+        //
+        $students = Student::all();
+        return view('studentData', compact('students'));
     }
 
     /**
@@ -68,6 +76,12 @@ class StudentController extends Controller
         $student = Student::with('profile')->findOrFail($id);
         return view('showStudent', compact('student'));
     }
+    public function showProfile(int $id)
+    {
+        //
+        $student = Student::with('profile')->findOrFail($id);
+        return view('editProfile', compact('student'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -77,6 +91,16 @@ class StudentController extends Controller
         //
         $student = Student::findOrFail($id);
         return view('editStudent', compact('student'));
+    }
+
+    public function editProfile(Request $request, int $id)
+    {
+        $student = Student::with('profile')->findOrFail($id);
+        $student->profile->phone = $request->phone;
+        $student->profile->address = $request->address;
+        $student->profile->guardian_name = $request->guardian_name;
+        $student->profile->update();
+        return redirect("/student/$id");
     }
 
     /**
@@ -89,7 +113,10 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->email = $request->email;
         $student->age = $request->age;
-        $student->image = $request->file('image')->store('studentsImages', 'public');
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($student->image);
+            $student->image = $request->file('image')->store('studentsImages', 'public');
+        }
         $student->update();
         return redirect('/student');
     }
@@ -101,6 +128,9 @@ class StudentController extends Controller
     {
         //
         $student = Student::findOrFail($id);
+        if ($student->image) {
+            Storage::disk('public')->delete($student->image);
+        }
         $student->delete();
         return redirect('/student');
     }
