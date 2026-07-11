@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     //
-    public function profiles()
+    public function profile()
     {
         return $this->hasOne(StudentProfile::class);
     }

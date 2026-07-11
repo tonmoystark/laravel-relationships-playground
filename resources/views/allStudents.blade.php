@@ -49,7 +49,7 @@
 
                     <div class="mt-6 flex justify-center">
                         <a
-                            href="/students/{{ $student->id }}"
+                            href="/student/{{ $student->id }}"
                             class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
                         >
                             View Details

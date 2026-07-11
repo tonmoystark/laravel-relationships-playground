@@ -26,6 +26,12 @@ class StudentController extends Controller
         return view('createStudent');
     }
 
+    public function createProfile(int $id)
+    {
+        $student = Student::findOrFail($id);
+        return view('createProfile', compact('student'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -41,35 +47,49 @@ class StudentController extends Controller
         return redirect('/student');
     }
 
+    public function storeProfile(Request $request, int $id)
+    {
+        //
+        $student = Student::with('profile')->findOrFail($id);
+        $student->profile()->create([
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'guardian_name' => $request->guardian_name,
+        ]);
+        return redirect("/student/$id");
+    }
+
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(int $id)
     {
         //
-        $student = Student::findOrFail($student->id);
-        return view('showStudent', $student);
+        $student = Student::with('profile')->findOrFail($id);
+        return view('showStudent', compact('student'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(int $id)
     {
         //
-        $student = Student::findOrFail($student->id);
-        return view('editStudent', $student);
+        $student = Student::findOrFail($id);
+        return view('editStudent', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, int $id)
     {
         //
-        $student = Student::with('profiles')->findOrFail($student->id);
+        $student = Student::with('profile')->findOrFail($id);
         $student->name = $request->name;
         $student->email = $request->email;
+        $student->age = $request->age;
+        $student->image = $request->file('image')->store('studentsImages', 'public');
         $student->update();
         return redirect('/student');
     }
@@ -77,10 +97,10 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(int $id)
     {
         //
-        $student = Student::findOrFail($student->id);
+        $student = Student::findOrFail($id);
         $student->delete();
         return redirect('/student');
     }
