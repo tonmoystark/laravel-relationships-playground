@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +34,11 @@ Route::prefix('mentor')->controller(MentorController::class)->group(function () 
     Route::get('/{id}/edit', 'edit')->name('mentor.edit');
     Route::put('/{id}', 'update')->name('mentor.update');
     Route::delete('/{id}', 'destroy')->name('mentor.destroy');
+});
+
+Route::prefix('course')->controller(CourseController::class)->group(function () {
+    Route::get('/', 'index')->name('course.allCourses');
+    Route::get('/create', 'create')->name('course.create');
+    Route::post('/store', 'store')->name('course.store');
+    Route::get('/{id}', 'show')->name('course.show');
 });
