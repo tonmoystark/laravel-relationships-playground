@@ -54,24 +54,35 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
         //
+        $course = Course::findOrFail($id);
+        return view('project3.editCourse', compact('course'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CourseFormRequest $request, int $id)
     {
         //
+        $course = Course::findOrFail($id);
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->start_date = $request->start_date;
+        $course->save();
+        return redirect()->route('course.allCourses');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         //
+        $course = Course::findOrFail($id);
+        $course->delete();
+        return redirect()->route('course.allCourses');
     }
 }

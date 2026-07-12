@@ -41,4 +41,7 @@ Route::prefix('course')->controller(CourseController::class)->group(function () 
     Route::get('/create', 'create')->name('course.create');
     Route::post('/store', 'store')->name('course.store');
     Route::get('/{id}', 'show')->name('course.show');
+    Route::get('/{id}/edit', 'edit')->name('course.edit');
+    Route::put('/{id}', 'update')->name('course.update');
+    Route::delete('/{id}', 'destroy')->name('course.destroy');
 });
