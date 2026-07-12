@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MentorFormRequest;
+use App\Http\Requests\UpdateMentorRequest;
 use App\Models\Mentor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MentorController extends Controller
 {
@@ -61,24 +63,42 @@ class MentorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mentor $mentor)
+    public function edit(int $id)
     {
-        //
+        $mentor = Mentor::findOrFail($id);
+        return view('project3.editMentor', compact('mentor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mentor $mentor)
+    public function update(UpdateMentorRequest $request, int $id)
     {
         //
+        $mentor = Mentor::findOrFail($id);
+        $mentor->name = $request->name;
+        $mentor->email = $request->email;
+        $mentor->phone = $request->phone;
+        $mentor->job_title = $request->job_title;
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($mentor->image);
+            $mentor->image = $request->file('image')->store('mentorsImages', 'public');
+        }
+        $mentor->update();
+        return redirect('/mentor');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mentor $mentor)
+    public function destroy(int $id)
     {
         //
+        $mentor = Mentor::findOrFail($id);
+        if ($mentor->image) {
+            Storage::disk('public')->delete($mentor->image);
+        }
+        $mentor->delete();
+        return redirect('/mentor/manage');
     }
 }

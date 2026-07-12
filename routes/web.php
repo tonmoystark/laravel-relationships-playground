@@ -30,4 +30,7 @@ Route::prefix('mentor')->controller(MentorController::class)->group(function () 
     Route::get('/create', 'create')->name('mentor.create');
     Route::post('/store', 'store')->name('mentor.store');
     Route::get('/manage', 'mentorsData')->name('mentor.manage');
+    Route::get('/{id}/edit', 'edit')->name('mentor.edit');
+    Route::put('/{id}', 'update')->name('mentor.update');
+    Route::delete('/{id}', 'destroy')->name('mentor.destroy');
 });
