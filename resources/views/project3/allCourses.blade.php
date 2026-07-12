@@ -38,7 +38,7 @@
                         </h3>
 
                         <!-- Description -->
-                        <p class="text-slate-500 mt-4 leading-relaxed flex-grow">
+                        <p class="text-slate-500 mt-4 leading-relaxed grow">
                             {{ Str::limit($course->description, 120) }}
                         </p>
 
