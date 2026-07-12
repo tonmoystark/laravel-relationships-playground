@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MentorFormRequest;
 use App\Models\Mentor;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,8 @@ class MentorController extends Controller
     public function index()
     {
         //
+        $mentors = Mentor::all();
+        return view('project3.allMentors', compact('mentors'));
     }
 
     /**
@@ -21,14 +24,30 @@ class MentorController extends Controller
     public function create()
     {
         //
+        return view('project3.createMentor');
+    }
+
+    public function mentorsData()
+    {
+        //
+        $mentors = Mentor::all();
+        return view('project3.manageMentors', compact('mentors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MentorFormRequest $request)
     {
         //
+        $mentor = new Mentor();
+        $mentor->name = $request->name;
+        $mentor->email = $request->email;
+        $mentor->phone = $request->phone;
+        $mentor->job_title = $request->job_title;
+        $mentor->image = $request->file('image')->store('mentorsImages', 'public');
+        $mentor->save();
+        return redirect('/mentor');
     }
 
     /**

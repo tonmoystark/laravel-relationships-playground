@@ -24,6 +24,10 @@ Route::prefix('student')->controller(StudentController::class)->group(function (
 });
 
 
-Route::prefix('mentors')->controller(MentorController::class)->group(function () {
+Route::prefix('mentor')->controller(MentorController::class)->group(function () {
     // we will start work from here.
+    Route::get('/', 'index')->name('mentor.index');
+    Route::get('/create', 'create')->name('mentor.create');
+    Route::post('/store', 'store')->name('mentor.store');
+    Route::get('/manage', 'mentorsData')->name('mentor.manage');
 });
