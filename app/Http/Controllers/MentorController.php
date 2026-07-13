@@ -81,6 +81,13 @@ class MentorController extends Controller
         return back();
     }
 
+    public function syncCourses(Request $request, int $id)
+    {
+        $mentor = Mentor::findOrFail($id);
+        $mentor->courses()->sync($request->courses);
+        return back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

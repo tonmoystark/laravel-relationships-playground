@@ -35,7 +35,8 @@ Route::prefix('mentor')->controller(MentorController::class)->group(function () 
     Route::get('/{id}/edit', 'edit')->name('mentor.edit');
     Route::put('/{id}', 'update')->name('mentor.update');
     Route::delete('/{id}', 'destroy')->name('mentor.destroy');
-    Route::post('/{id}/assign', 'assignCourse')->name('mentor.assignCourse');
+    // Route::post('/{id}/assign', 'assignCourse')->name('mentor.assignCourse');
+    Route::post('/{id}/sync', 'syncCourses')->name('mentor.syncCourse');
     Route::delete('/{mentor}/course/{course}', 'unassignCourse')->name('mentor.unassignCourse');
 });
 

@@ -138,46 +138,74 @@
                 <!-- Assign Course -->
                 <div class="mt-10">
 
-                    <h3 class="text-xl font-bold text-slate-800 mb-5">
-                        Assign New Course
-                    </h3>
+    <h3 class="text-xl font-bold text-slate-800 mb-2">
+        Manage Assigned Courses
+    </h3>
 
-                    <form action="{{ route('mentor.assignCourse', $mentor->id) }}" method="POST">
+    <p class="text-slate-500 mb-6">
+        Select the courses you want this mentor to teach.
+    </p>
 
-                        @csrf
-                        <div class="flex gap-4">
+    <form
+        action="{{ route('mentor.syncCourse', $mentor->id) }}"
+        method="POST"
+    >
 
-                            <select
-                                class="flex-1 border border-gray-300 rounded-lg px-4 py-3"
-                                name="course_id"
-                            >
+        @csrf
 
-                                <option value="" selected disabled>
-                                    Select a Course
-                                </option>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                @foreach($courses as $course)
+            @foreach ($courses as $course)
 
-                                    <option value="{{ $course->id }}">
-                                        {{ $course->name }}
-                                    </option>
+                <label
+                    class="flex items-center justify-between border rounded-xl p-4 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition"
+                >
 
-                                @endforeach
+                    <div>
 
-                            </select>
+                        <h4 class="font-semibold text-slate-800">
+                            {{ $course->name }}
+                        </h4>
 
-                            <button
-                                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
-                            >
-                                Assign Course
-                            </button>
+                        <p class="text-sm text-slate-500">
+                            Starts:
+                            {{ \Carbon\Carbon::parse($course->start_date)->format('d M, Y') }}
+                        </p>
 
-                        </div>
+                    </div>
 
-                    </form>
+                    <input
+                        type="checkbox"
+                        name="courses[]"
+                        value="{{ $course->id }}"
+                        class="w-5 h-5"
 
-                </div>
+                        @checked(
+                            $mentor->courses->contains($course->id)
+                        )
 
+                    >
+
+                </label>
+
+            @endforeach
+
+        </div>
+
+        <div class="mt-8 flex justify-end">
+
+            <button
+                type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition"
+            >
+                Update Courses
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
                 <!-- Bottom Buttons -->
                 <div class="mt-10 flex gap-4">
 
