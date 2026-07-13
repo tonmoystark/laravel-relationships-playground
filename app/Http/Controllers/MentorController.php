@@ -73,6 +73,13 @@ class MentorController extends Controller
         return back();
     }
 
+    public function unassignCourse(int $mentorID, int $courseID)
+    {
+        $mentor = Mentor::findOrFail($mentorID);
+        $mentor->courses()->detach($courseID);
+
+        return back();
+    }
 
     /**
      * Show the form for editing the specified resource.

@@ -103,11 +103,17 @@
 
                                     </div>
 
-                                    <button
+                                    <form action="{{ route('mentor.unassignCourse', [$mentor->id, $course->id]) }}" method="post">
+
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                        type="submit"
                                         class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
                                     >
                                         Remove
-                                    </button>
+                                </button>
+                                    </form>
 
                                 </div>
 

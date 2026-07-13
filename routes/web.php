@@ -26,7 +26,7 @@ Route::prefix('student')->controller(StudentController::class)->group(function (
 
 
 Route::prefix('mentor')->controller(MentorController::class)->group(function () {
-    // we will start work from here.
+
     Route::get('/', 'index')->name('mentor.index');
     Route::get('/create', 'create')->name('mentor.create');
     Route::post('/store', 'store')->name('mentor.store');
@@ -36,6 +36,7 @@ Route::prefix('mentor')->controller(MentorController::class)->group(function () 
     Route::put('/{id}', 'update')->name('mentor.update');
     Route::delete('/{id}', 'destroy')->name('mentor.destroy');
     Route::post('/{id}/assign', 'assignCourse')->name('mentor.assignCourse');
+    Route::delete('/{mentor}/course/{course}', 'unassignCourse')->name('mentor.unassignCourse');
 });
 
 Route::prefix('course')->controller(CourseController::class)->group(function () {

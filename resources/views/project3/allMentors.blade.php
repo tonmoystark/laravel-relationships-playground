@@ -34,6 +34,7 @@
                     <div class="flex justify-center">
                         <img
                             src="{{ asset('storage/' . $mentor->image) }}"
+                            loading="lazy"
                             alt="Mentor"
                             class="w-24 h-24 rounded-full border-4 border-white object-cover -mt-12"
                         >
